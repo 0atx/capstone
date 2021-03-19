@@ -1,0 +1,18 @@
+@charset "UTF-8";
+a:link {color:black; text-decoration:none;}
+a:visited {color:black; text-decoration:none;}
+.menu { top: 0; width: 100vw; height :10vh; z-index: 9999 !important;
+		color : black; background : #FEFDFD;
+		display : flex;}
+.rightMap { position : absolute; top : 60px; right:0px; 
+			z-index : 2; background-color :#FAFBF9; 
+			width:20vw; height:100vh;
+			overflow : scroll;}
+.leftMap { position : absolute; top : 60px; left:0px;
+			z-index : 2; background-color : #FAFBF9;
+			width : 15vw; height:100vh;
+			overflow : scroll;}
+.search { padding : 1em;}		
+.m1 { display : inline-block; top : -5px}
+#menulist { list-style : none; }
+#blank { color : #FEFDFD; }

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>HJJH Trip MAP PART</title>
+	<meta charset="utf-8">
+	<link rel="stylesheet" type="text/css" href="map.css" />
+	<script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
+</head>
+<body>
+	<!-- 상단 네비게이션 바 부분 -->
+	<div class="menu">
+	<nav>
+		<a href="#" class="m1"><!-- 홈페이지 부분 URL 추가해 연결 -->
+		<b>HJJH TRIP</b>
+		<span class="m1"><h6>&nbsp;YOUR TRIP ROUTE WITH US&nbsp;</h6></span>
+		<span id="blank">ㅁㄴㅇㄻㄴㅇㄻㄴㅇㄻㄴㅇㄻㄴㅇㄻㄴㅇㄻㄴㅇㄻㄴㅇㄻㄴㅇㄻㄴㅇㄹㅁㄴㅇㄻㄴㅇㄻㄴㅇㄻㄴㅇㄹㅁㄴㅇㄻㄴㅇㄻ</span>
+		</a>
+		<ul class="m1" id="menulist">
+			<li>
+				MENU &nbsp;&nbsp;<i class="fas fa-caret-down"></i>
+			</li>
+		</ul>
+	</nav>
+	</div>
+	<!-- 지도 부분 -->
+	<div id="map" style="width:100vw;height:100vh;"></div>
+	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=48003175ba9df6daee13eb781dd7ff9d"></script>
+	<script>
+		var mapContainer = document.getElementById('map');
+		var mapOptions = {
+			center: new kakao.maps.LatLng(33.450701, 126.570667),
+			level: 3
+		};
+
+		var map = new kakao.maps.Map(mapContainer, mapOptions);
+		
+		if (navigator.geolocation) {
+		    
+		    // GeoLocation을 이용해서 접속 위치를 얻어옵니다
+		    navigator.geolocation.getCurrentPosition(function(position) {
+		        
+		        var lat = position.coords.latitude, // 위도
+		            lon = position.coords.longitude; // 경도
+		        
+		        var locPosition = new kakao.maps.LatLng(lat, lon), // 마커가 표시될 위치를 geolocation으로 얻어온 좌표로 생성합니다
+		            message = '<div style="padding:5px;">현재위치</div>'; // 인포윈도우에 표시될 내용입니다
+		        
+		        // 마커와 인포윈도우를 표시합니다
+		        displayMarker(locPosition, message);
+		            
+		      });
+		    
+		    function displayMarker(locPosition, message) {
+		        // 마커를 생성합니다
+		        var marker_present = new kakao.maps.Marker({  
+		            map: map, 
+		            position: locPosition
+		        }); 
+		            
+		        // 지도 중심좌표를 접속위치로 변경합니다
+		        map.setCenter(locPosition);      
+		    }    
+		}
+	</script>
+	<!-- 검색 우측 상단부분 -->
+	<div class="rightMap">
+		<div class="search">
+			<input type="text" data-attrnum="10" data-attrtype="placeholder" 
+			placeholder="검색어를 입력하세요.">
+			<button><i class="fas fa-search"></i></button>
+		</div>
+	<!-- 검새 우측 하단부분 -->
+		<div>
+		여기에 검색결과 리스트
+		</div>
+	</div>
+	<!-- 왼쪽 일정부분 -->
+	<div class="leftMap">
+		일정들어갈부분
+	</div>
+</body>
+</html>

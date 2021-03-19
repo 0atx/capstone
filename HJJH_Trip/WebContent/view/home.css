@@ -1,0 +1,7 @@
+@charset "UTF-8";
+.home-img {
+	color : white; background-color : black;
+	background-image : url("cloud2.jpg"); background-repeat: no-repeat;
+	height : 400px;
+}
+.home-text { position : absolute; }
