@@ -20,7 +20,7 @@
 	<div class="home-text">
 		<h1 style="font-size:45px">HJJH TRIP</h1>
 		<h5>당신의 여행 우리와 함께 계획 신나는 여행</h5>
-		<button><a href="${pageContext.request.contextPath}/map">시작하기</button>
+		<button><a href="${pageContext.request.contextPath}/map">시작하기</a></button>
 	</div>
 </div>
 <!-- 여행지 검색 및 선택-->

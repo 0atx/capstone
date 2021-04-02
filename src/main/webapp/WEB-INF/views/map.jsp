@@ -10,6 +10,8 @@
     <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
 </head>
 <body>
+	<script src="https://code.jquery.com/jquery-3.6.0.js" 
+	integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
 	<!-- 상단 네비게이션 바 부분 -->
 	<div class="menu">
 	<nav>
@@ -69,38 +71,70 @@
 		<div class="search">
 			<input type="text" data-attrnum="10" data-attrtype="placeholder" id="keyword"
 			placeholder="검색어를 입력하세요.">
-			<button onclick="searchKeyword()"><i class="fas fa-search"></i></button>
+			<button id="search"><i class="fas fa-search"></i></button>
 		</div>
 		
 		<script>
-		function searchKeyword() {
-			var keyword = document.getElementById("keyword").innerText;
 			
-			var xhr = new XMLHttpRequest();
-			var url = 'http://api.visitkorea.or.kr/openapi/service/rest/KorService/searchKeyword'; /*URL*/
-			var queryParams = '?' + encodeURIComponent('ServiceKey') + '=VNaqzDwNJ%2FOM63fE4jF24L%2Bjmj59Bi%2FUtih0EOI0rGttlzFNccoDOGBf2oJl7y7vdy%2B1AWZPVvEYcVEFgn%2FTUA%3D%3D'; /*Service Key*/
-			queryParams += '&' + encodeURIComponent('MobileApp') + '=' + encodeURIComponent('AppTest'); /**/
-			queryParams += '&' + encodeURIComponent('MobileOS') + '=' + encodeURIComponent('ETC'); /**/
-			queryParams += '&' + encodeURIComponent('pageNo') + '=' + encodeURIComponent('1'); /**/
-			queryParams += '&' + encodeURIComponent('numOfRows') + '=' + encodeURIComponent('10'); /**/
-			queryParams += '&' + encodeURIComponent('listYN') + '=' + encodeURIComponent('Y'); /**/
-			queryParams += '&' + encodeURIComponent('arrange') + '=' + encodeURIComponent('A'); /**/
-			queryParams += '&' + encodeURIComponent('keyword') + '=' + encodeURIComponent("'"+keyword+"'"); /**/
-			queryParams += '&_' + encodeURIComponent('type') + '=' + encodeURIComponent('json');
-			xhr.open('GET', url + queryParams);
-			xhr.setRequestHeader('Accept', 'application/json');
-			xhr.onreadystatechange = function () {
-			    if (this.readyState == 4) {
-			        alert('Status: '+this.status+'nHeaders: '+JSON.stringify(this.getAllResponseHeaders())+'nBody: '+this.responseText);
-			    }
-			};
 
-			xhr.send('');
+		$( document ).ready(function() {
+			$("#search").click(function(){
+				var keyword = document.getElementById("keyword").value;
+				var urlstr = 
+		    		"http://api.visitkorea.or.kr/openapi/service/rest/KorService/searchKeyword?" +
+		            "ServiceKey=VNaqzDwNJ%2FOM63fE4jF24L%2Bjmj59Bi%2FUtih0EOI0rGttlzFNccoDOGBf2oJl7y7vdy%2B1AWZPVvEYcVEFgn%2FTUA%3D%3D" +
+		            "&pageNo=1" +
+		            "&numOfRows=10" +
+		            "&MobileOS=ETC" +
+		            "&MobileApp=AppTest" +
+		            "&listYN=Y" +
+		            "&arrange=A" +
+		            "&keyword=" + keyword +
+		            "&type=json";
+		    	$.ajax({
+		        	url: urlstr, // apitest
+		        	type:'GET',
+		        	data: {
+		            	Name:'ajax',
+		            	Keyword: "'" + keyword + "'"
+		        	},
+		        	dataType:'json', // 리턴해주는 타입을 지정해줘야함
+		        	beforeSend:function(jqXHR) {
+		            	console.log("ajax호출전");
+		        	},// 서버 요청 전 호출 되는 함수 return false; 일 경우 요청 중단
+		        	success: function(data) {
+		        		$('#list > tbody').remove();
+		            	console.log("호출성공");
+		            	console.log(data);
+		            	var item = data.response.body.items.item
+		            	$("#img").append("<img src='" + item[0].firstimage2 + "'/>");
+                    	$("#title").append(item[0].title);
+                    	
+                    	$('#list').append("<tbody>");
+                    	for(var i = 0; item.length; i++) {
+                    		var output ='';
+                    		output += "<tr><td rowspan='2'><div id='img'><img src='" + item[i].firstimage2 + "' height='150' width='150'/></div></td>";
+                    		output += "<td colspan='2'><div id='title'>" + item[i].title + "</div></td></tr>";
+                    		output += "<tr><td>+</td><td>돋보기</td></tr>";
+                    		$('#list').append(output);
+                    	}
+                    	$('#list').append("</tbody>");
+		        	},// 요청 완료 시
+		        	error:function(jqXHR) {
+		            	console.log("실패입니다.");
+		        	}// 요청 실패.
+		    	});
+			});
+		});
 
-	</script>
-	<!-- 검새 우측 하단부분 -->
+
+
+		</script>
+	<!-- 검색 우측 하단부분 -->
 		<div>
-		여기에 검색결과 리스트
+		<table id="list" border="0">	
+		<tbody>여기에 검색결과 리스트</tbody>
+		</table>
 		</div>
 	</div>
 	<!-- 왼쪽 일정부분 -->
