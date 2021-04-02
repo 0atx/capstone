@@ -5,20 +5,37 @@ a:link {color:black; text-decoration:none;}
 a:visited {color:black; text-decoration:none;}
 
 .menu { top: 0; width: 100vw; height :10vh; z-index: 9999 !important;
-		color : black; background : #FEFDFD;
-		display : flex;}
+      color : black; background : #FEFDFD;
+      display : flex;}
 
 .rightMap { position : absolute; top : 60px; right:0px; 
-			z-index : 2; background-color :#FAFBF9; 
-			width:20vw; height:100vh;
-			overflow : scroll;}
+         z-index : 2; background-color :#FAFBF9; 
+         width:20vw; height:100vh;
+         overflow : scroll;}
 
 .leftMap { position : absolute; top : 60px; left:0px;
-			z-index : 2; background-color : #FAFBF9;
-			width : 15vw; height:100vh;
-			overflow : scroll;}
+         z-index : 2; background-color : #FAFBF9;
+         width : 15vw; height:100vh;
+         overflow : scroll; text-align:center;}
+.day {position : absolute; z-index:2; width:100px; height:100px; top:10px; }         
+#calendar {position: absolute; z-index:2; border:1px solid #BDBDBD; text-align:center; width:70px; height:70px; top:10px; left:5px;}
 
-.search { padding : 1em;}		
+
+.multibtnleft { position : absolute; z-index : 2; left:200px; }
+
+.user_button {margin:5px; border-radius:50%; width:55px; height:55px; font-size:3pt; background-color:#DF0174; border-style:hidden; color:#FFFFFF;}
+
+.spot_button {margin:5px; border-radius:50%; width:55px; height:55px; font-size:3pt; background-color:#2E2EFE; border-style:hidden; color:#FFFFFF;}
+
+
+.multibtnright {position: absolute; z-index: 2;  left:850px;}
+
+.hotel {margin:5px; border-radius:50%; width:55px; height:55px; font-size:3pt; background-color:#FF4000; border-style:hidden; color:#FFFFFF;}
+
+.spot {margin:5px; border-radius:50%; width:55px; height:55px; font-size:3pt; background-color:#045FB4; border-style:hidden; color:#FFFFFF;}
+
+.search { padding : 1em;}      
+
 
 .m1 { display : inline-block; top : -5px}
 
@@ -26,4 +43,10 @@ a:visited {color:black; text-decoration:none;}
 
 #blank { color : #FEFDFD; visibility : hidden;}
 
-#map { width:100vw; height:100vh; }
+#map {position: absolute; z-index : 1; width:100vw; height:100vh; }
+
+#pagination {margin:10px auto;text-align: center;}
+
+#pagination a {display:inline-block;margin-right:10px;}
+
+#pagination .on {font-weight: bold; cursor: default;color:#777;}
