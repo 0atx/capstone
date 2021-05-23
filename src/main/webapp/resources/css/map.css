@@ -4,24 +4,80 @@ a:link {color:black; text-decoration:none;}
 
 a:visited {color:black; text-decoration:none;}
 
-.menu { top: 0; width: 100vw; height :10vh; z-index: 9999 !important;
-      color : black; background : #FEFDFD;
-      display : flex;}
+body { overflow : hidden;}
 
-.rightMap { position : absolute; top : 60px; right:0px; 
-         z-index : 2; background-color :#FAFBF9; 
-         width:20vw; height:100vh;
-         overflow : scroll;}
+input[type="number"] {
+   width:40px; height : 20px; border : none;
+}
 
-.leftMap { position : absolute; top : 60px; left:0px;
-         z-index : 2; background-color : #FAFBF9;
-         width : 15vw; height:100vh;
-         overflow : scroll; text-align:center;}
-.day {position : absolute; z-index:2; width:100px; height:100px; top:10px; }         
-#calendar {position: absolute; z-index:2; border:1px solid #BDBDBD; text-align:center; width:70px; height:70px; top:10px; left:5px;}
+.menu { top: 0; width: 100vw; height :10vh; z-index: 1000 !important;
+      color : black; background : #FEFDFD; }
 
+.black_overlay{
+   
+        display: none;
+        position: absolute;
+        top: 0%;
+        left: 0%;
+        width: 102%;
+        height: 100%;
+        background-color: black;
+        z-index:1001;
+        -moz-opacity: 0.8;
+        opacity:.80;
+        filter: alpha(opacity=80);
+}
 
-.multibtnleft { position : absolute; z-index : 2; left:200px; }
+.white_content {
+   
+        display: none;
+        position: absolute;
+        top: 10%;
+        left: 20%;
+        width: 60%;
+        height: 80%;
+        padding: 16px;
+        border-radius : 3px;
+        background-color: white;
+        z-index:1002;
+        overflow: auto;
+        text-align : center;
+}
+
+.row {
+      border : none;
+      border-bottom : 1px solid #2e4d65;
+      outline : none;
+      height : 60px;
+}
+
+.rightMap { position : absolute; top : 60px; right:-10px; 
+         z-index : 2; background-color :#f0faf9;
+         width:20vw; height:90vh;
+         overflow-y : scroll;}
+
+.leftMap { position : absolute; top : 60px; left: 0px;
+         z-index : 2; background-color :#f0faf9;
+         width : 18vw; height:90vh;
+         overflow-y : scroll; text-align:center;}
+
+.rightMap::-webkit-scrollbar{  
+   display:none; /*chrome, safari, opera*/
+}
+.rightMap{
+   --ms-overflow-style: none;  /* IE and Edge */
+   scrollbar-width: none;  /* Firefox */
+}
+       
+.leftMap::-webkit-scrollbar{  
+   display:none; /*chrome, safari, opera*/
+}
+.leftMap{
+   --ms-overflow-style: none;  /* IE and Edge */
+   scrollbar-width: none;  /* Firefox */
+}
+
+.multibtnleft { position : absolute; z-index : 2; left:240px; }
 
 .user_button {margin:5px; border-radius:50%; width:55px; height:55px; font-size:3pt; background-color:#DF0174; border-style:hidden; color:#FFFFFF;}
 
@@ -32,21 +88,62 @@ a:visited {color:black; text-decoration:none;}
 
 .hotel {margin:5px; border-radius:50%; width:55px; height:55px; font-size:3pt; background-color:#FF4000; border-style:hidden; color:#FFFFFF;}
 
-.spot {margin:5px; border-radius:50%; width:55px; height:55px; font-size:3pt; background-color:#045FB4; border-style:hidden; color:#FFFFFF;}
+.spotrecommend {margin:5px; border-radius:50%; width:55px; height:55px; font-size:3pt; background-color:#045FB4; border-style:hidden; color:#FFFFFF;}
 
 .search { padding : 1em;}      
 
+.show_select {margin:5px; position: absolute; z-index:2;  width:100px; height:100px; left:100px; top:300px; }
 
-.m1 { display : inline-block; top : -5px}
+.cal {    background-color : #ffffff; margin : 7px 4px 1px 3px; border-radius : 1px; box-shadow : 4px 4px 5px #bdbdbd;}
+
+.selectedSpots{
+   background-color : #ffffff; margin : 18px 4px 1px 3px; border-radius : 1px; box-shadow : 4px 4px 5px #bdbdbd;
+}
+
+.resetplanbtn{
+   background-color : #15d2c5; border:none !important;
+}
+
+.resetplanbtn:hover {
+   background-color : #11aa9e;
+}
+.searchbtn{
+   background-color : #15d2c5; border:none !important; color : #ffffff;
+}
+
+.searchbtn:hover {
+   background-color : #11aa9e;
+}
+
+.spot {
+   text-align : left;
+}
+
+#dropdownMenuButton1:hover {
+   background-color : #11aa9e !important;
+}
+#removebtn{
+   background-color : rgba(242, 79, 74, 0.38);
+   border : none !important; color : #ffffff;
+}
+
+#removebtn:hover {
+   background-color :  rgba(242, 79, 74, 0.8);
+}
+
+#spotLists{
+}
+
+#li_wrap {
+   border-color : #b2b2b2; border-radius : 1px; box-shadow : 2px 2px 3px #bdbdbd; display: flex;
+}
 
 #menulist { list-style : none; float: right; }
 
 #blank { color : #FEFDFD; visibility : hidden;}
 
-#map {position: absolute; z-index : 1; width:100vw; height:100vh; }
-
+#datepicker {width:140px; height:15px; position: absolte; }
+#datepicker2 {width:160px; height:15px;}
 #pagination {margin:10px auto;text-align: center;}
-
 #pagination a {display:inline-block;margin-right:10px;}
-
 #pagination .on {font-weight: bold; cursor: default;color:#777;}
