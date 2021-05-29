@@ -1,15 +1,11 @@
 //마커를 담을 배열입니다
-var markers = [];
-var selectedmarkers = [];
-var smarkers = [];
-var addrs = [];
-var titles = [];
-var stt = [];
-var sadr = [];
-var index = [];
-var flag = [];
-var leftindex = [];
-var cnt = 0;
+var markers = []; // 검색시 출력되는 마커 배열
+var addrs = []; // 주소 정보 배열
+var titles = []; // 장소 이름 정보 배열
+var selectedmarkers = []; // 검색목록에서 클릭시 담길 마커 배열
+//var selectedtitles = []; // 검색목록에서 클릭시 담길 장소 이름 정보 배열
+//var selectedaddrs = []; // 검색목록에서 클릭시 담길 주소 정보 배열
+//var index = []; // 주소 태그 id 구분할 떄 쓰임
 // 장소 검색 객체를 생성합니다
 var ps = new kakao.maps.services.Places();
 // 검색 결과 목록이나 마커를 클릭했을 때 장소명을 표출할 인포윈도우를 생성합니다
@@ -62,9 +58,7 @@ function displayPlaces(places) {
 	//removeMarker();
 
 	for (let i = 0; i < places.length; i++) {
-		flag[i] = 0;
-		leftindex[i] = 0;
-		index[i] = i + 1;
+		//index[i] = i + 1;
 		// 마커를 생성하고 지도에 표시합니다
 		var placePosition = new kakao.maps.LatLng(places[i].y,
 			places[i].x), marker = addMarker(placePosition, i), itemEl = getListItem(
@@ -100,15 +94,12 @@ function displayPlaces(places) {
 			};
 
 			itemEl.onmouseout = function() {
-				selectedmarkers = [];
-				selectedmarkers = smarkers;
-				console.log("마우스out" + smarkers.length);
-				if (smarkers.length > 0) {
+				if (selectedmarkers.length > 0) {
 					marker.setMap(null);
 					infowindow.close();
 
-					for (var j = 0; j < smarkers.length; j++)
-						smarkers[j].setMap(map);
+					for (var j = 0; j < selectedmarkers.length; j++)
+						selectedmarkers[j].setMap(map);
 
 				} else
 					marker.setMap(null);
@@ -117,35 +108,28 @@ function displayPlaces(places) {
 			};
 
 			itemEl.onclick = function() {
-
 				//중복 처리
-				if (flag[i] == 0) {
+				var bool = 0;
+				for(var i = 0; i < titles.length; i++) {
+					if(titles[i] == title)
+						bool = 1;
+				}
+				if (bool == 0) {
 
 					marker.setMap(map);
 					marker.setImage(clickImage);
 
 					selectedmarkers.push(marker);
 
-					leftindex[cnt] = i; // ??
-					cnt++;
-
-					var s = 'spotaddr' + index[i];
-
-					addrs = [];
-					addrs = sadr;
-					titles = [];
-					titles = stt;
-
+					var s = 'spotaddr' +  i;
+					
 					if (title != "undefined") {
 						addrs.push(document.getElementById(s).innerHTML);
 						titles.push(title);
 						console.log(title);
-						smarkers = selectedmarkers;
 
-						displaySpots(smarkers, titles, addrs, leftindex);
-						console.log("displaySpots : smarkers.length " + smarkers.length);
+						displaySpots(selectedmarkers, titles, addrs);
 
-						flag[i] = 1;
 					}
 				};
 
@@ -170,7 +154,7 @@ function getListItem(index, places) {
 		+ '<div class="info"><span style="display: inline-block; height: .90em;">'
 		+ '   <h6>' + places.place_name + '</h6></span>';
 
-	itemStr += '    <br><span id="spotaddr' + (index + 1) + '" style="font-size: .80em;">'
+	itemStr += ' <br><span id="spotaddr'+ index +'" style="font-size: .80em;">'
 		+ places.address_name + '</span><br>';
 
 	itemStr += '  <span class="tel" style="font-size: .80em;">'

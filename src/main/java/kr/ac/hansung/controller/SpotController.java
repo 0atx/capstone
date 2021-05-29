@@ -38,11 +38,12 @@ public class SpotController {
          return new ResponseEntity<>(HttpStatus.NO_CONTENT);
       }
 
-      return new ResponseEntity<List<Spot>>(spots, HttpStatus.OK);
+      return ResponseEntity.ok(spots);
+      //return new ResponseEntity<List<Spot>>(spots, HttpStatus.OK);
    }
    
    @RequestMapping(path = "/{id}", method = RequestMethod.GET)
-   public ResponseEntity<Spot> retrieveSpot(@PathVariable Long id) {
+   public ResponseEntity<?> retrieveSpot(@PathVariable String id) {
       
       Spot spot = spotService.getSpotById(id);
       
@@ -50,20 +51,22 @@ public class SpotController {
          throw new NotFoundException(id);
       }
       
+      
       return new ResponseEntity<Spot>(spot, HttpStatus.OK);
       
    }
    
     @RequestMapping(method = RequestMethod.POST)
-      public ResponseEntity<Spot> createSpot(@RequestBody @Valid SpotDto request) {
+      public ResponseEntity<?> createSpot(@RequestBody @Valid SpotDto request) {
 
-         Spot spot = spotService.createSpot(request.getTitle(), request.getAddr(), request.getMapx(), request.getMapy(), request.getCat());
-
-         return new ResponseEntity<Spot>(spot, HttpStatus.CREATED);
+         final Spot spot = spotService.createSpot(request.getId(), request.getTitle(), request.getAddr(), request.getMapx(), request.getMapy());
+       
+         //return new ResponseEntity<Spot>(spot, HttpStatus.CREATED);
+         return ResponseEntity.status(HttpStatus.CREATED).body(spot);
       }
        
       @RequestMapping(path = "/{id}", method = RequestMethod.PUT)
-      public ResponseEntity<Spot> updateSpot(@PathVariable Long id, @RequestBody @Valid SpotDto request) {
+      public ResponseEntity<?> updateSpot(@PathVariable String id, @RequestBody @Valid SpotDto request) {
          
          Spot currentSpot = spotService.getSpotById(id);
          
@@ -85,7 +88,7 @@ public class SpotController {
       }
 
       @RequestMapping(path = "/{id}", method = RequestMethod.DELETE)
-      public ResponseEntity<Void> deleteSpot(@PathVariable Long id) {
+      public ResponseEntity<?> deleteSpot(@PathVariable String id) {
          // Getting the requiring spot; or throwing exception if not found
          final Spot spot = spotService.getSpotById(id);
          
@@ -104,17 +107,11 @@ public class SpotController {
       @Setter
       static class SpotDto {
          
-           @NotNull(message = "name is required")
-           @Size(message = "name must be equal to or lower than 300", min = 1, max = 300)
-           private String title;           
-           
-           @NotNull(message = "name is required")
+    	   private String id;
+           private String title;             
            private String addr;
-           
            private double mapx;
-           
            private double mapy;
-           
            private String cat;
       }
 }

@@ -18,6 +18,9 @@ function disappearRight() {
 
 function removeLi() {
 	$('li').remove('.spot');
+	selectedmarkers = [];
+	titles = [];
+	addrs = [];
 }
 
 function removeLiOne(n) {

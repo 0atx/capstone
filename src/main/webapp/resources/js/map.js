@@ -33,4 +33,5 @@ if (navigator.geolocation) {
 		// 지도 중심좌표를 접속위치로 변경합니다
 		map.setCenter(locPosition);
 	}
+	
 }

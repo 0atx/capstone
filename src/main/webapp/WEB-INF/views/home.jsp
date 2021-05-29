@@ -28,7 +28,35 @@
    <div id="carousel-example-generic" class="carousel slide" data-bs-ride="carousel">   
       <div class="carousel-inner">
          <div class="carousel-item active">
-            <img src ="${pageContext.request.contextPath}/resources/img/desc1.JPG" class="d-block w-100">
+            <img src ="${pageContext.request.contextPath}/resources/img/desc1.jpg" class="d-block w-100">
+         </div>
+         <div class="carousel-item">
+            <img src ="${pageContext.request.contextPath}/resources/img/desc2.jpg" class="d-block w-100">
+         </div>
+         <div class="carousel-item">
+            <img src ="${pageContext.request.contextPath}/resources/img/desc3.jpg" class="d-block w-100">
+         </div>
+      </div>
+      <button class="carousel-control-prev" type="button" data-bs-target="#carousel-example-generic" data-bs-slide="prev">
+         <i class="fas fa-chevron-left"></i>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#carousel-example-generic" data-bs-slide="next">
+         <i class="fas fa-chevron-right"></i>
+      </button>
+   </div>
+</div>
+</div>          
+<body>
+<!-- 네비바 이용방법 클릭시 나타날 div 팝업  -->
+<div id="light" class="white_content"><bs>사이트 이용방법</b>
+<a href = "javascript:void(0)" style ="visibility: visible !important;" onclick = "document.getElementById('light').style.display='none';document.getElementById('fade').style.display='none'">
+<i class="fas fa-times"></i></a>
+<p style="font-size : 4px;">HJJH TRIP 페이지의 이용방법을 안내해드립니다.</p>
+<div style = "width : 400px; margin-left : 300px;"> <!-- carousel 구성영역 -->
+   <div id="carousel-example-generic" class="carousel slide" data-bs-ride="carousel">   
+      <div class="carousel-inner">
+         <div class="carousel-item active">
+            <img src ="${pageContext.request.contextPath}/resources/img/desc1.jpg" class="d-block w-100">
          </div>
          <div class="carousel-item">
             <img src ="${pageContext.request.contextPath}/resources/img/desc2.jpg" class="d-block w-100">
@@ -107,10 +135,10 @@
 <div class="page-start">
 <div class="home-img">
    <div class="home-text">
-      <h1 style="font-size:45px">HJJH TRIP</h1>
+      <h1 style="font-size:45px;">HJJH TRIP</h1>
       <h5>당신의 여행 우리와 함께 계획 신나는 여행</h5>
-      <button class="start-button" style="vertical-align:middle">
-      <a href="${pageContext.request.contextPath}/map" style="text-decoration:none; color:#FFFFFF">시작하기</a></button>
+      <button class="start-button" style="vertical-align:middle" onclick="fnMove('searchpage')">
+      <a style="text-decoration:none; color:#FFFFFF">시작하기</a></button>
    </div>
 </div>
 </div>
@@ -261,6 +289,12 @@
       </div>
       </div>
    </div>
+   </div>
+</div>
+<!-- 페이지 설명 부분 -->
+<div>
+   <div>
+      <h5> 쉽고 간편한 여행계획 <b>HJJH TRIP</b></h5>
    </div>
 </div>
 <footer>

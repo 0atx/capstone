@@ -17,7 +17,7 @@ public class SpotDao {
    private SessionFactory sessionFactory;
    
    //query and return a single object
-   public Spot getSpotById(Long id) {
+   public Spot getSpotById(String id) {
       Session session = sessionFactory.getCurrentSession();
       Spot spot = (Spot) session.get(Spot.class, id);
       
@@ -37,9 +37,9 @@ public class SpotDao {
       }
       
       //Crud method
-      public Long addSpot(Spot spot) {
+      public String addSpot(Spot spot) {
          Session session = sessionFactory.getCurrentSession();
-         Long id = (Long) session.save(spot);
+         String id = (String) session.save(spot);
          session.flush();
          return id;
       }

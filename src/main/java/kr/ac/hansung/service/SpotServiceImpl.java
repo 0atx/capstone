@@ -23,26 +23,24 @@ public class SpotServiceImpl implements SpotService {
    }
 
    @Override
-   public Spot getSpotById(Long id) {
+   public Spot getSpotById(String id) {
       return spotRepository.getSpotById(id);
    }
 
    @Override
-   public Spot createSpot(String title, String addr, double mapx, double mapy, String cat) {
+   public Spot createSpot(String id, String title, String addr, double mapx, double mapy) {
       // TODO Auto-generated method stub
       Spot spot = new Spot();
+      spot.setId(id);
       spot.setTitle(title);
       spot.setAddr(addr);
       spot.setMapx(mapx);
       spot.setMapy(mapy);
-      spot.setCat(cat);
-
-      Long id = spotRepository.addSpot(spot);
-      spot.setId(id);
+      
+      spotRepository.addSpot(spot);
       
       return spot;
    }
-
 
    @Override
    public void updateSpot(Spot spot) {
@@ -53,5 +51,24 @@ public class SpotServiceImpl implements SpotService {
    public void deleteSpot(Spot spot) {
       spotRepository.deleteSpot(spot);
    }
+   
+   @Override
+   public void addPlan(Spot spot, Plan plan) {
+      // TODO Auto-generated method stub
+      spot.getPlans().add(plan);
+      
+      spotRepository.updateSpot(spot);   
+   }
+
+   @Override
+   public boolean hasPlan(Spot spot, Plan plan) {
+      return spot.getPlans().contains(plan);
+   }
+   @Override
+   public void removePlan(Spot spot, Plan plan) {
+      // TODO Auto-generated method stub
+      
+   }
+
 
 }

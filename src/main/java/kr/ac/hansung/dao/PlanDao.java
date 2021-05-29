@@ -16,7 +16,7 @@ public class PlanDao {
    @Autowired
    private SessionFactory sessionFactory;
 
-   public Plan getPlanById(Long id) {
+   public Plan getPlanById(String id) {
       Session session = sessionFactory.getCurrentSession();
       Plan plan = (Plan) session.get(Plan.class, id);
       
@@ -33,9 +33,9 @@ public class PlanDao {
       return plans;
    }
 
-   public Long addPlan(Plan plan) {
+   public String addPlan(Plan plan) {
       Session session = sessionFactory.getCurrentSession();
-      Long id = (Long) session.save(plan);
+      String id = (String) session.save(plan);
       session.flush();
       return id;
    }
