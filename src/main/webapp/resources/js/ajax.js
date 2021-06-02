@@ -60,7 +60,8 @@ function postSpot(email) {
 		var day = $(".spot_days" + i).val();
 		var planId = email.split('@');
 		planId[0] += "_" + day;
-		var spotId = i + 1;
+		var id = i + 1;
+		var spotId = planId[0] + "_" + id;
 		
 		$.ajax({
 			url: 'http://localhost:1000/hansung/api/spots', //데이터베이스에 접근해 현재페이지로 결과를 뿌려줄 페이지

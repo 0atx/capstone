@@ -27,6 +27,7 @@
 <body>
    <!-- 네비바 MENU 드롭다운 버튼 중 일정창, 장소창 숨기기 기능  -->
 
+	<div id="defaultKeyword" style="display: none;">전주</div>
    <div id="wrap_all_Conents" class="container-fluid">
       <!-- 네비바 MENU 드롭다운 버튼 중 피드백 버튼 클릭시 팝업되는 div  -->
       <div id="light" class="white_content">

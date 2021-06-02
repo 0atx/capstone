@@ -7,10 +7,25 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class MapController {
-	@RequestMapping("/map")
-	public String showMap() { 
+	@RequestMapping("/busan_map")
+	public String showBusanMap() { 
 		
-		return "map";
+		return "busan_map";
+	}
+	@RequestMapping("/andong_map")
+	public String showAndongMap() { 
+		
+		return "andong_map";
+	}
+	@RequestMapping("/gangneung_map")
+	public String showGangneungMap() { 
+		
+		return "gangneung_map";
+	}
+	@RequestMapping("/jeonju_map")
+	public String showJeonjuMap() { 
+		
+		return "jeonju_map";
 	}
 
 }
