@@ -164,6 +164,37 @@
             </div>
          </div>
       </div>
+      
+      <!-- 이메일 중복 처리 MODAL -->
+      <div id="dupModal" class="emailDupModal">
+         <div class="email-dup-modal-content">
+            <div class="page-header">
+               <h1 class="nanum">HJJH TRIP</h1>
+            </div>
+            <hr>
+            <label class="position-left">
+               <h7>
+                  <b data-langnum="53">이미 일정이 존재하는 이메일입니다. 기존 일정을 삭제 후 저장하거나 다른 이메일을 입력해주세요.</b>       
+               </h7>
+            </label> 
+            <br>        
+            <div class="modalSaveBtn d-grid gap-2">
+            <div class="row" style="margin : 8px 5px 8px 5px;">
+                  <button class="btn btn-primary" onclick="deleteAndSave()" id="savePlanBtn" >
+                     <div><i class="far fa-envelope"></i><br>
+                     <h7 data-langnum="54">기존 일정 삭제 후 저장</h7></div>
+                  </button>
+               </div>
+                 <div class="row" style="margin : 8px 5px 8px 5px;">
+                  <button class="btn btn-danger" onclick="returnShowModal()" id="returnPlanBtn">
+                     <div><i class="fas fa-sign-out-alt"></i><br>
+                     <h7 data-langnum="54">다른 이메일 입력하기</h7></div>
+                  </button>
+              </div>
+            </div>
+         </div>
+      </div>
+      
 
       <!-- 지도 부분 -->
       <div id="map" style="width: 100vw; height: 100vh;"></div>

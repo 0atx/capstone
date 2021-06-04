@@ -41,7 +41,7 @@ function placesSearchCB(data, status, pagination) {
 
 		alert('검색 결과가 존재하지 않습니다.');
 		return;
-	} else if (status === kakao.maps.services.Status.ERROR) {
+	} else if (status === kakao.maps.services.Status.ERROR) { 
 
 		alert('검색 결과 중 오류가 발생했습니다.');
 		return;
@@ -140,7 +140,7 @@ function displayPlaces(places) {
 
 		fragment.appendChild(itemEl);
 	}
-	// 검색결과 항목들을 검색결과 목록 Elemnet에 추가합니다
+	// 검색결과 항목들을 검색결과 목록 Element에 추가합니다
 	listEl.appendChild(fragment);
 	menuEl.scrollTop = 0;
 	// 검색된 장소 위치를 기준으로 지도 범위를 재설정합니다

@@ -117,3 +117,59 @@ function postPlanSpot(planId, spotId) {
 		}
 	});
 }
+
+function getUser(email) {
+	$.ajax({
+		url: 'http://localhost:1000/hansung/api/users/' + email + '/', //데이터베이스에 접근해 현재페이지로 결과를 뿌려줄 페이지
+		method: 'get',
+		async: false,
+	    success: function(data) { //DB접근 후 가져온 데이터
+	    	showDupModal();
+		},
+		error: function(request, status, error) {
+			save();
+		}
+	});
+}
+
+function deleteSpot(id) {
+	$.ajax({
+		url: 'http://localhost:1000/hansung/api/spots/' + id + '/', //데이터베이스에 접근해 현재페이지로 결과를 뿌려줄 페이지
+		method: 'delete',
+		async: false,
+	    success: function(data) { //DB접근 후 가져온 데이터
+	    	console.log("spot 삭제 성공");
+		},
+		error: function(request, status, error) {
+			console.log("spot 삭제 실패");
+		}
+	});
+}
+
+function deletePlan(id) {
+	$.ajax({
+		url: 'http://localhost:1000/hansung/api/plans/' + id + '/', //데이터베이스에 접근해 현재페이지로 결과를 뿌려줄 페이지
+		method: 'delete',
+		async: false,
+	    success: function(data) { //DB접근 후 가져온 데이터
+	    	console.log("plan 삭제 성공");
+		},
+		error: function(request, status, error) {
+			console.log("plan 삭제 실패");
+		}
+	});
+}
+
+function deleteUser(email) {
+	$.ajax({
+		url: 'http://localhost:1000/hansung/api/users/' + email + '/', //데이터베이스에 접근해 현재페이지로 결과를 뿌려줄 페이지
+		method: 'delete',
+		async: false,
+	    success: function(data) { //DB접근 후 가져온 데이터
+	    	console.log("user 삭제 성공");
+		},
+		error: function(request, status, error) {
+			console.log("user 삭제 실패");
+		}
+	});
+}

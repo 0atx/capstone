@@ -21,53 +21,54 @@ import kr.ac.hansung.service.UserService;
 @RequestMapping(path = "/api/users/{email}/plans")
 public class UserPlansController {
 
-	@Autowired
-	private UserService userService;
+   @Autowired
+   private UserService userService;
 
-	@Autowired
-	private PlanService planService;
+   @Autowired
+   private PlanService planService;
 
-	@RequestMapping(method = RequestMethod.GET)
-	public ResponseEntity<?> retrieveAllplans(@PathVariable String email) {
-		// Getting the requiring user; or throwing exception if not found
-		final User user = userService.getUserById(email);
-		if (user == null)
-			throw new NotFoundException(email);
+   @RequestMapping(method = RequestMethod.GET)
+   public ResponseEntity<?> retrieveAllplans(@PathVariable String email) {
+      // Getting the requiring user; or throwing exception if not found
+      final User user = userService.getUserById(email);
+      
+      if (user == null)
+         throw new NotFoundException(email);
 
-		// Getting all products in application...
-		final List<Plan> plans = planService.getAllPlans();
-		if (plans.isEmpty()) {
-			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-		}
+      // Getting all products in application...
+      final List<Plan> plans = planService.getAllPlans();
+      if (plans.isEmpty()) {
+         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+      }
 
-		return ResponseEntity.ok(plans);
-		// return new ResponseEntity<List<User>>(plans, HttpStatus.OK);
+      return ResponseEntity.ok(plans);
+      // return new ResponseEntity<List<User>>(plans, HttpStatus.OK);
 
-	}
-	
-	@RequestMapping(path = "/{planid}", method = RequestMethod.POST)
-	public ResponseEntity<?> addPlan(@PathVariable String email, @PathVariable String planid) {
+   }
+   
+   @RequestMapping(path = "/{planid}", method = RequestMethod.POST)
+   public ResponseEntity<?> addPlan(@PathVariable String email, @PathVariable String planid) {
 
-		// Getting the requiring user; or throwing exception if not found
-		final User user = userService.getUserById(email);
-		if (user == null)
-			throw new NotFoundException(email);
+      // Getting the requiring user; or throwing exception if not found
+      final User user = userService.getUserById(email);
+      if (user == null)
+         throw new NotFoundException(email);
 
-		// Getting the requiring product; or throwing exception if not found
-		final Plan plan = planService.getPlanById(planid);
-		if (plan == null)
-			throw new NotFoundException(planid);
+      // Getting the requiring product; or throwing exception if not found
+      final Plan plan = planService.getPlanById(planid);
+      if (plan == null)
+         throw new NotFoundException(planid);
 
-		// Validating if association does not exist...
-		if (planService.hasUser(plan, user)) {
-			throw new IllegalArgumentException(
-					"plan " + plan.getId() + " already contains user " + user.getUserID());
-		}
+      // Validating if association does not exist...
+      if (planService.hasUser(plan, user)) {
+         throw new IllegalArgumentException(
+               "plan " + plan.getId() + " already contains user " + user.getUserID());
+      }
 
-		// Associating plan with user...
-		planService.addUser(plan, user);
+      // Associating plan with user...
+      planService.addUser(plan, user);
 
-		return ResponseEntity.status(HttpStatus.CREATED).body(plan);
-	}
+      return ResponseEntity.status(HttpStatus.CREATED).body(plan);
+   }
 
 }

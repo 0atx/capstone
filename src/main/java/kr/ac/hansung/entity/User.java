@@ -21,7 +21,6 @@ import lombok.ToString;
 
 @Getter
 @Setter
-@ToString
 
 @Entity
 @Table(name="user_table")
@@ -30,7 +29,6 @@ public class User {
 	@Email
 	@Column(name="email", nullable = false)
 	private String userID;
-	
 	
 	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name="user_plan", joinColumns= @JoinColumn(name="email"), 
