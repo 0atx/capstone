@@ -2,7 +2,7 @@
 ### 한성대학교 컴퓨터공학부 2021년도 캡스톤 디자인 
 
 
-  <caption> TEAM MEMBERS</caption>
+  <caption><b> TEAM MEMBERS</b></caption>
   
 | 이름 | 학번 |
 |:-:|---|
@@ -37,7 +37,7 @@
 
 ## 2. 프로젝트 결과물의 개요
 
-### 2.1 프로젝트 설명
+### 2.1 프로젝트 개요 및 설명
 
 <p>
 최근 코로나19로 인해서 국내여행의 인기가 높아지고 있고, 현재에는 패키지상품을 제외하고, 사용자가 직접 모든 일정을 관리할 수 있는 웹페이지는 많지 않다.
@@ -64,4 +64,23 @@ Tomcat Server를 이용한 Web Application을 사용자들에게 제공한다.<b
   <img src="https://lh5.googleusercontent.com/KdxEzK4w7-DG3H7d62oqx_PGanIDqQSgMoe2_qEYATHlEDcZfT53IPYioEYg2ecjS9hHAiWbmfTL9JrFstkIR4eg2hrc0cUx6_I18U0YqC9kjDC1GGhRrVWBN2Z4MlECvP9_y-pt" title="전체 시나리오 구조도">
     <figcaption><b><시나리오 구조도></b></figcaption>
   </figure>
-
+    
+### 2.4 기술 스택
+    
+    
+| Tech Stack | Explication|
+|:-:|---|
+|  Kakao map API | 장소의 경로와 위치 핀 표시 등을 지도에 나타내기 위해 필요한 api|
+| MySQL | RDBMS. 일정 관리에 사용|
+| Tomcat  | 웹서버 구현|
+| Java  | 개발 언어|
+| Javascript  | 개발 언어 및 디자인|
+| CSS  | 웹 디자인|
+| Spring MVC  | opensource application framework|
+| Hibernate  | 데이터베이스의 관계 mapping|
+| Bootstrap5  | 웹 디자인 |
+| Eclipse  | 개발 환경|
+| JQuery  | 웹 기능 및 디자인|
+| Ajax  | 데이터베이스 접근 및 사용 |
+    
+    
