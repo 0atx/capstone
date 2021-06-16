@@ -64,11 +64,11 @@ public class SpotServiceImpl implements SpotService {
    public boolean hasPlan(Spot spot, Plan plan) {
       return spot.getPlans().contains(plan);
    }
+
    @Override
    public void removePlan(Spot spot, Plan plan) {
       // TODO Auto-generated method stub
       
    }
-
 
 }

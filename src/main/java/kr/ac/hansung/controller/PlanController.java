@@ -36,7 +36,6 @@ public class PlanController {
       }
 
         return ResponseEntity.ok(plans);
-      //return new ResponseEntity<List<Category>>(plans, HttpStatus.OK);
       
     }
 

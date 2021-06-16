@@ -39,7 +39,6 @@ public class UserController {
       }
 
         return ResponseEntity.ok(users);
-      //return new ResponseEntity<List<Category>>(plans, HttpStatus.OK);
       
     }
    
@@ -106,8 +105,7 @@ public class UserController {
         @NotNull(message = "name is required")
         @Size(message = "name must be equal to or lower than 300", min = 1, max = 300)
         private String userId;           
-        
-       
+               
    }
    
 }

@@ -53,8 +53,7 @@ public class PlanServiceImpl implements PlanService {
     
     @Override
     public void addUser(Plan plan, User user) {
-    	plan.getUsers().add(user);
-    	
+    	plan.getUsers().add(user);    	
     	planRepository.updatePlan(plan);
     }
     

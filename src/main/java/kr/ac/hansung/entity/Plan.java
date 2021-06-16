@@ -42,16 +42,10 @@ public class Plan {
    @Column
    private String ToTalDate;
    
-   
    @ManyToMany(fetch = FetchType.EAGER)
    @JoinTable(name = "user_plan", joinColumns = @JoinColumn(name = "plan_id"), inverseJoinColumns = @JoinColumn(name = "email"))
    @JsonIgnore
    private Set<User> users;
-   
-   /*
-    * @OneToMany(fetch = FetchType.EAGER, mappedBy= "plan") private List<Spot>
-    * spots = new ArrayList<>();
-    */
    
    @ManyToMany(fetch = FetchType.EAGER)
    @JoinTable(name="plan_spot", joinColumns= @JoinColumn(name="plan_id"), 

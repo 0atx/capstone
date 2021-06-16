@@ -48,12 +48,6 @@ public class Spot {
    @Column
    private String cat; //카테고리
    
-	/*
-	 * @ManyToOne(targetEntity=Plan.class, fetch=FetchType.LAZY)
-	 * 
-	 * @JoinColumn(name="plan_id") private Plan plan;
-	 */
-
    @ManyToMany(fetch = FetchType.EAGER)
    @JoinTable(name = "plan_spot", joinColumns = @JoinColumn(name = "spot_id"), inverseJoinColumns = @JoinColumn(name = "plan_id"))
    @JsonIgnore
