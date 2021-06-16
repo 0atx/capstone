@@ -1,24 +1,19 @@
-var diffDays;
+var diffDays = 2;
 var token;
 var header;
 var spotCount = 0;
 var planCount = 0;
 var users;
-var dup = 0;
 
-var csrfToken = $("meta[name='_csrf']").attr("content");
-$.ajaxPrefilter(function(options, originalOptions, jqXHR) {
-	if (options['type'].toLowerCase() === "post") {
-		jqXHR.setRequestHeader('X-CSRF-TOKEN', csrfToken);
-	}
-});
-
+$(".totalDay *").remove();
+var inner = "<span>총 여행일수 : " + diffDays + "</span>";
+$(".totalDay").append(inner);
 
 $(function() {
 	fn_default_datepicker();
 
-	token = $("input[name='_csrf']").val();
-	header = "X-CSRF-TOKEN";
+	//token = $("input[name='_csrf']").val();
+	//header = "X-CSRF-TOKEN";
 
 });
 
@@ -30,9 +25,6 @@ function fn_default_datepicker() {
 		, showMonthAfterYear: true //년도 먼저 나오고, 뒤에 월 표시
 		, changeYear: true //콤보박스에서 년 선택 가능
 		, changeMonth: true //콤보박스에서 월 선택 가능              
-		//,showOn: "both" //button:버튼을 표시하고,버튼을 눌러야만 달력 표시 ^ both:버튼을 표시하고,버튼을 누르거나 input을 클릭하면 달력 표시
-		//,buttonImage: "http://jqueryui.com/resources/demos/datepicker/images/calendar.gif" //버튼 이미지 경로
-		//,buttonImageOnly: true //기본 버튼의 회색 부분을 없애고, 이미지만 보이게 함
 		, buttonText: "선택" //버튼에 마우스 갖다 댔을 때 표시되는 텍스트                
 		, yearSuffix: "년" //달력의 년도 부분 뒤에 붙는 텍스트
 		, monthNamesShort: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'] //달력의 월 부분 텍스트
@@ -45,6 +37,10 @@ function fn_default_datepicker() {
 
 			var startday = select;
 			alert("여행 시작일 " + select + " 로 선택되었습니다.");
+			$(".totalDay *").remove();
+			var inner = "<span>총 여행일수 : " + diffDays + "</span>";
+			$(".totalDay").append(inner);
+			displaySpots(selectedmarkers, titles, addrs);
 		}
 		, onClose: function(select) {
 			$("#datepicker2").datepicker("option", "minDate", select);
@@ -61,9 +57,6 @@ function fn_default_datepicker() {
 		, showMonthAfterYear: true //년도 먼저 나오고, 뒤에 월 표시
 		, changeYear: true //콤보박스에서 년 선택 가능
 		, changeMonth: true //콤보박스에서 월 선택 가능                
-		//,showOn: "both" //button:버튼을 표시하고,버튼을 눌러야만 달력 표시 ^ both:버튼을 표시하고,버튼을 누르거나 input을 클릭하면 달력 표시  
-		//,buttonImage: "http://jqueryui.com/resources/demos/datepicker/images/calendar.gif" //버튼 이미지 경로
-		//,buttonImageOnly: true //기본 버튼의 회색 부분을 없애고, 이미지만 보이게 함
 		, buttonText: "선택" //버튼에 마우스 갖다 댔을 때 표시되는 텍스트                
 		, yearSuffix: "년" //달력의 년도 부분 뒤에 붙는 텍스트
 		, monthNamesShort: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'] //달력의 월 부분 텍스트
@@ -72,7 +65,6 @@ function fn_default_datepicker() {
 		, dayNames: ['일요일', '월요일', '화요일', '수요일', '목요일', '금요일', '토요일'] //달력의 요일 부분 Tooltip 텍스트
 		, minDate: "today"  //최소 선택일자(-1D:하루전, -1M:한달전, -1Y:일년전)
 		, maxDate: "+4D"//최대 선택일자(+1D:하루후, -1M:한달후, -1Y:일년후)
-		// ,defaultDate: "+1w"
 		, onSelect: function(end) {
 			alert("여행종료일 " + end + " 로 선택되었습니다.");
 			calday();
@@ -80,6 +72,7 @@ function fn_default_datepicker() {
 			$(".totalDay *").remove();
 			var inner = "<span>총 여행일수 : " + diffDays + "</span>";
 			$(".totalDay").append(inner);
+			displaySpots(selectedmarkers, titles, addrs);
 		}
 	});
 
@@ -94,126 +87,4 @@ function calday() {
 		c = 24 * 60 * 60 * 1000,
 		diffDays = Math.round(Math.abs((start - end) / (c))) + 1;
 
-}
-
-function save() {
-
-	var email = $("#email").val();
-
-	var a = $("#datepicker").datepicker({ dateFormat: 'yyyymmdd' }).val();
-	var b = $("#datepicker2").datepicker({ dateFormat: 'yyyymmdd' }).val();
-
-	alert("출발: " + a + " 도착:" + b + " 총 여행일수: " + diffDays);
-
-	postUser(email);
-	postPlan(email, a, b, diffDays);
-	postSpot(email);
-				
-	// 다음 페이지 만들어지면 그 넘어갈 페이지 작업으로 변경
-
-};
-
-function deleteAndSave() {
-	var email = $("#email").val();
-	var planId = email.split('@');
-	
-	$.ajax({
-		url: 'http://localhost:1000/hansung/api/spots', //데이터베이스에 접근해 현재페이지로 결과를 뿌려줄 페이지
-		method: 'get',
-		async: false,
-		success: function(data) { //DB접근 후 가져온 데이터
-			for(var i = 0; i < data.length; i++) {
-				var sid = data[i].id.split('_'); 
-				if(sid[0] == planId[0]) {
-					deleteSpot(data[i].id);
-				}
-			} 
-		},
-		error: function(request, status, error) {
-			console.log("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
-		}
-	});
-		
-	$.ajax({
-		url: 'http://localhost:1000/hansung/api/plans', //데이터베이스에 접근해 현재페이지로 결과를 뿌려줄 페이지
-		method: 'get',
-		async: false,
-		success: function(data) { //DB접근 후 가져온 데이터
-			for(var i = 0; i < data.length; i++) {
-				var pid = data[i].id.split('_'); 
-				if(pid[0] == planId[0]) {
-					deletePlan(data[i].id);
-				}
-			} 
-		},
-		error: function(request, status, error) {
-			console.log("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
-		}
-	});	
-
-	$.ajax({
-		url: 'http://localhost:1000/hansung/api/users', //데이터베이스에 접근해 현재페이지로 결과를 뿌려줄 페이지
-		method: 'get',
-		async: false,
-		success: function(data) { //DB접근 후 가져온 데이터
-			for(var i = 0; i < data.length; i++) {
-				var uid = data[i].userID; 
-				if(uid == email) {
-					deleteUser(data[i].userID);
-				}
-			} 
-		},
-		error: function(request, status, error) {
-			console.log("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
-		}
-	});
-
-	closeDupModal();
-	save();
-
-}
-
-function showModal() {
-	$("#modal").show();
-}
-
-function closeModal() {
-	$("#modal").hide();
-}
-
-function showDupModal() {
-	$("#dupModal").show();
-	$("#modal").hide();
-}
-
-function returnShowModal() {
-	$("#dupModal").hide();
-	$("#modal").show();
-}
-
-function closeDupModal() {
-	$("#dupModal").hide();
-}
-
-function checkEmail() {
-
-	var email = $("#email").val();
-
-	var reg_email = /^([0-9a-zA-Z_\.-]+)@([0-9a-zA-Z_-]+)(\.[0-9a-zA-Z_-]+){1,2}$/;
-	if (!email) {
-		alert("이메일을 입력하세요.");
-		$("#email").focus();
-		return;
-	}
-	else {
-		if (!reg_email.test(email)) {
-			alert("이메일 형식이 잘못되었습니다.");
-			$("#email").focus();
-			return;
-		}
-		else {
-			closeModal();
-			getUser(email);
-		}
-	}
 }

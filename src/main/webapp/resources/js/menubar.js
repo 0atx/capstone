@@ -18,17 +18,17 @@ function disappearRight() {
 
 function removeLi() {
 	$('li').remove('.spot');
-	
+
 	var clickImage = new daum.maps.MarkerImage(
-			'http://t1.daumcdn.net/localimg/localimages/07/2018/pc/img/marker_spot.png',
-			new daum.maps.Size(24, 35), new daum.maps.Point(13,
-				37));
-	
+		'http://t1.daumcdn.net/localimg/localimages/07/2018/pc/img/marker_spot.png',
+		new daum.maps.Size(24, 35), new daum.maps.Point(13,
+			37));
+
 	for (var i = 0; i < selectedmarkers.length; i++) {
 		selectedmarkers[i].setImage(clickImage);
 		selectedmarkers[i].setMap(null);
 	}
-	
+
 	selectedmarkers = [];
 	titles = [];
 	addrs = [];

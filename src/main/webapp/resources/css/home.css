@@ -70,18 +70,18 @@ header:after {
 
 .home-img {
    color : white; background-color : white;
-   background-image : url("../img/cloud3.jpg");
    width : 100%;
    height : 600px;
+   background-size : cover;
    padding-top : 60px;
 }
 
-.home-text { position : absolute; font-family: 'Jal_Onuel'; }
+.home-text { position : absolute; font-family: 'Jal_Onuel'; margin-top:40px; margin-left : 30px; }
 
 .start-button {
    display: inline-block;
     border-radius: 4px;
-   background-color: #4be0d6;
+   background-color: #00e8e8;
    border: none;
    color: #FFFFFF;
    text-align: center;
@@ -91,8 +91,95 @@ header:after {
    transition: all 0.5s;
    cursor: pointer;
    margin: 5px;
-   }
+}
+   
+/* The Modal (background) */
+.emailModal {
+   display: none; /* Hidden by default */
+   position: fixed; /* Stay in place */
+   z-index: 10; /* Sit on top */
+   left: 0;
+   top: 0;
+   width: 100%; /* Full width */
+   height: 100%; /* Full height */
+   overflow: auto; /* Enable scroll if needed */
+   background-color: rgb(0, 0, 0); /* Fallback color */
+   background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+}
+/* Modal Content/Box */
+.email-modal-content {
+   background-color: #fefefe;
+   margin: 15% auto; /* 15% from the top and centered */
+   padding: 20px;
+   border: 1px solid #888;
+   width: 70%; /* Could be more or less, depending on screen size */
+}
 
+/* The Modal (background) */
+.emailErrorModal {
+   display: none; /* Hidden by default */
+   position: fixed; /* Stay in place */
+   z-index: 10; /* Sit on top */
+   left: 0;
+   top: 0;
+   width: 100%; /* Full width */
+   height: 100%; /* Full height */
+   overflow: auto; /* Enable scroll if needed */
+   background-color: rgb(0, 0, 0); /* Fallback color */
+   background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+}
+/* Modal Content/Box */
+.email-error-modal-content {
+   background-color: #fefefe;
+   margin: 15% auto; /* 15% from the top and centered */
+   padding: 20px;
+   border: 1px solid #888;
+   width: 70%; /* Could be more or less, depending on screen size */
+}
+
+
+
+.position-left{
+   margin-left : 15px;
+}
+
+.emailForm { position:relative; height:60px; margin: 10px 10px 20px 15px;} /* 기본세팅 */
+.emailForm input { box-sizing:border-box; padding:20px 0 0; width:100%; height:100%; border:0 none; color:#595f63; outline:none; }
+.emailForm label { position:absolute; left:0%; bottom:0; width:100%; height:100%; border-bottom:1px solid #bdbdbd; text-align:left; 
+      pointer-events:none; color : #bdbdbd;}
+.emailForm label:after { content:""; position:absolute; left:0; bottom:-1px; width:0; height:100%; border-bottom:3px solid #15d2c5; transition:all .3s ease; } /* 파란색 가로줄 */
+.emailForm label span { position:absolute; left:0; bottom:5px; transition:all .3s ease; }
+.emailForm input:focus + label span, 
+.emailForm input:valid + label span { transform:translateY(-150%); font-size:14px; color:#15d2c5; }  /* input에 글을 입력하고 포커스가 지나간 상태에서 제어하려면 valid 선택자를 써야한다. */
+/* 포커스 될 때 label span(name)이 위로 올라감 */
+.emailForm input:focus + label::after,
+.emailForm input:valid + label::after { width:100%; transform:translateX(0); } 
+/* 포커스 될 때 파란색 가로줄이 생김 */
+
+#showPlanBtn{
+   background-color : #59d9cc; border-color : #59d9cc;
+}
+
+#showPlanBtn:hover{
+   background-color : #2cbeaf !important; border-color : #2cbeaf !important;
+}
+
+#returnModalBtn{
+   background-color : #59d9cc; border-color : #59d9cc;
+}
+
+#returnModalBtn:hover{
+   background-color : #2cbeaf !important; border-color : #2cbeaf !important;
+}
+
+#returnBtn{
+   background-color : #c7cbc7; border-color : #c7cbc7;
+}
+
+#returnBtn:hover{
+   background-color : #9ca398 !important; border-color : #9ca398 !important;
+}
+   
 #worldlist {
    list-style:none;
    margin : 0;

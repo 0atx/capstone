@@ -2,57 +2,50 @@ function postUser(email) {
 	$.ajax({
 		url: 'http://localhost:1000/hansung/api/users', //데이터베이스에 접근해 현재페이지로 결과를 뿌려줄 페이지
 		method: 'post',
-	    dataType: 'json',
-	    accept: "aplication/json",
-	    contentType: "application/json;",
-	    data: JSON.stringify({
-	    	userId: email
-	    }),
-	    async: false,
-	    success: function(data) { //DB접근 후 가져온 데이터
-	    	console.log("user ajax 성공");
-	    },
-	    error: function(request, status, error) {
-	    	console.log("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
-	    }
+		dataType: 'json',
+		accept: "aplication/json",
+		contentType: "application/json;",
+		data: JSON.stringify({
+			userId: email
+		}),
+		async: false,
+		error: function(request, status, error) {
+			console.log("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
+		}
 	});
 }
 
 function postPlan(email, a, b, diffDays) {
-	for(var i = 1; i <= diffDays; i++) {
+	for (var i = 1; i <= diffDays; i++) {
 		var planId = email.split('@');
 		planId[0] += "_" + i;
 		$.ajax({
 			url: 'http://localhost:1000/hansung/api/plans', //데이터베이스에 접근해 현재페이지로 결과를 뿌려줄 페이지
 			method: 'post',
-	        dataType: 'json',
-	        accept: "aplication/json",
-	        contentType: "application/json;",
-	        data: JSON.stringify({
-	        	id: planId[0],
-	        	startDate: a,
-	            endDate: b,
-	            planDay: i,
+			dataType: 'json',
+			accept: "aplication/json",
+			contentType: "application/json;",
+			data: JSON.stringify({
+				id: planId[0],
+				startDate: a,
+				endDate: b,
+				planDay: i,
 				toTalDate: diffDays
 			}),
 			async: false,
-			success: function(data) { //DB접근 후 가져온 데이터
-				console.log("plan ajax 성공");
-			},
 			error: function(request, status, error) {
 				console.log("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
 			}
 		});
-      
 		postUserPlan(email, planId[0]);
-		
-	}   
+
+	}
 }
 
 function postSpot(email) {
-	
-	for(var i = 0; i < selectedmarkers.length; i++) {
-			
+
+	for (var i = 0; i < selectedmarkers.length; i++) {
+
 		var title = $("#spot_title" + i).html();
 		var addr = $("#spot_addr" + i).html();
 		var x = $("#spot_x" + i).html();
@@ -62,31 +55,28 @@ function postSpot(email) {
 		planId[0] += "_" + day;
 		var id = i + 1;
 		var spotId = planId[0] + "_" + id;
-		
+
 		$.ajax({
 			url: 'http://localhost:1000/hansung/api/spots', //데이터베이스에 접근해 현재페이지로 결과를 뿌려줄 페이지
 			method: 'post',
-	        dataType: 'json',
-	        accept: "aplication/json",
-	        contentType: "application/json;",
-	        data: JSON.stringify({
-	        	id: spotId,
-	        	title: title,
-	            addr: addr,
-	            mapx: x,
+			dataType: 'json',
+			accept: "aplication/json",
+			contentType: "application/json;",
+			data: JSON.stringify({
+				id: spotId,
+				title: title,
+				addr: addr,
+				mapx: x,
 				mapy: y
 			}),
 			async: false,
-			success: function(data) { //DB접근 후 가져온 데이터
-				console.log("spot ajax 성공");
-			},
 			error: function(request, status, error) {
 				console.log("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
 			}
 		});
-		
+
 		postPlanSpot(planId[0], spotId);
-		
+
 	}
 }
 
@@ -95,9 +85,6 @@ function postUserPlan(email, planId) {
 		url: 'http://localhost:1000/hansung/api/users/' + email + '/plans/' + planId, //데이터베이스에 접근해 현재페이지로 결과를 뿌려줄 페이지
 		method: 'post',
 		async: false,
-	    success: function(data) { //DB접근 후 가져온 데이터
-	    	console.log("user + plan 연결 ajax 성공");
-		},
 		error: function(request, status, error) {
 			console.log("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
 		}
@@ -109,9 +96,6 @@ function postPlanSpot(planId, spotId) {
 		url: 'http://localhost:1000/hansung/api/plans/' + planId + '/spots/' + spotId, //데이터베이스에 접근해 현재페이지로 결과를 뿌려줄 페이지
 		method: 'post',
 		async: false,
-	    success: function(data) { //DB접근 후 가져온 데이터
-	    	console.log("plan + spot 연결 ajax 성공");
-		},
 		error: function(request, status, error) {
 			console.log("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
 		}
@@ -123,11 +107,40 @@ function getUser(email) {
 		url: 'http://localhost:1000/hansung/api/users/' + email + '/', //데이터베이스에 접근해 현재페이지로 결과를 뿌려줄 페이지
 		method: 'get',
 		async: false,
-	    success: function(data) { //DB접근 후 가져온 데이터
-	    	showDupModal();
+		success: function(data) { //DB접근 후 가져온 데이터
+			showDupModal();
 		},
 		error: function(request, status, error) {
 			save();
+		}
+	});
+}
+
+function getSpot(email) {
+	var id = email.split('@');
+	$.ajax({
+		url: 'http://localhost:1000/hansung/api/spots/', //데이터베이스에 접근해 현재페이지로 결과를 뿌려줄 페이지
+		method: 'get',
+		async: false,
+		success: function(data) { //DB접근 후 가져온 데이터
+			if (data != undefined) {
+				for (var i = 0; i < data.length; i++) {
+					var spotid = data[i].id.split('_');
+					console.log(spotid[0]);
+					if (spotid[0] == id[0]) {
+						console.log(spotid);
+						showDupModal();
+						break;
+					}
+				}
+				if (i == data.length)
+					save();
+			}
+			else
+				save();
+		},
+		error: function(request, status, error) {
+			console.log("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
 		}
 	});
 }
@@ -137,9 +150,6 @@ function deleteSpot(id) {
 		url: 'http://localhost:1000/hansung/api/spots/' + id + '/', //데이터베이스에 접근해 현재페이지로 결과를 뿌려줄 페이지
 		method: 'delete',
 		async: false,
-	    success: function(data) { //DB접근 후 가져온 데이터
-	    	console.log("spot 삭제 성공");
-		},
 		error: function(request, status, error) {
 			console.log("spot 삭제 실패");
 		}
@@ -151,9 +161,6 @@ function deletePlan(id) {
 		url: 'http://localhost:1000/hansung/api/plans/' + id + '/', //데이터베이스에 접근해 현재페이지로 결과를 뿌려줄 페이지
 		method: 'delete',
 		async: false,
-	    success: function(data) { //DB접근 후 가져온 데이터
-	    	console.log("plan 삭제 성공");
-		},
 		error: function(request, status, error) {
 			console.log("plan 삭제 실패");
 		}
@@ -165,9 +172,6 @@ function deleteUser(email) {
 		url: 'http://localhost:1000/hansung/api/users/' + email + '/', //데이터베이스에 접근해 현재페이지로 결과를 뿌려줄 페이지
 		method: 'delete',
 		async: false,
-	    success: function(data) { //DB접근 후 가져온 데이터
-	    	console.log("user 삭제 성공");
-		},
 		error: function(request, status, error) {
 			console.log("user 삭제 실패");
 		}

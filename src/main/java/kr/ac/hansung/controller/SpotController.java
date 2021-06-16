@@ -39,7 +39,7 @@ public class SpotController {
       }
 
       return ResponseEntity.ok(spots);
-      //return new ResponseEntity<List<Spot>>(spots, HttpStatus.OK);
+      
    }
    
    @RequestMapping(path = "/{id}", method = RequestMethod.GET)
@@ -50,7 +50,6 @@ public class SpotController {
       if( spot == null) {
          throw new NotFoundException(id);
       }
-      
       
       return new ResponseEntity<Spot>(spot, HttpStatus.OK);
       
@@ -82,8 +81,6 @@ public class SpotController {
          
          spotService.updateSpot(currentSpot);
          return new ResponseEntity<Spot>(currentSpot, HttpStatus.OK);
-         
-         
          
       }
 

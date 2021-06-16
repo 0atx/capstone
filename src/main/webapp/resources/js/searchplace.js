@@ -3,9 +3,7 @@ var markers = []; // 검색시 출력되는 마커 배열
 var addrs = []; // 주소 정보 배열
 var titles = []; // 장소 이름 정보 배열
 var selectedmarkers = []; // 검색목록에서 클릭시 담길 마커 배열
-//var selectedtitles = []; // 검색목록에서 클릭시 담길 장소 이름 정보 배열
-//var selectedaddrs = []; // 검색목록에서 클릭시 담길 주소 정보 배열
-//var index = []; // 주소 태그 id 구분할 떄 쓰임
+
 // 장소 검색 객체를 생성합니다
 var ps = new kakao.maps.services.Places();
 // 검색 결과 목록이나 마커를 클릭했을 때 장소명을 표출할 인포윈도우를 생성합니다
@@ -17,10 +15,11 @@ searchPlaces();
 // 키워드 검색을 요청하는 함수입니다
 function searchPlaces() {
 	var keyword = document.getElementById('keyword').value;
-	var defaultKeyword = $("#defaultKeyword").html();
 
-	if (keyword == '')
+	if (keyword == '' && defaultKeyword != "null")
 		keyword = defaultKeyword;
+	if (defaultKeyword == "null")
+		keyword = "한성대학교 ";
 	if (!keyword.replace(/^\s+|\s+$/g, '')) {
 		alert('키워드를 입력해주세요!');
 		return false;
@@ -41,7 +40,7 @@ function placesSearchCB(data, status, pagination) {
 
 		alert('검색 결과가 존재하지 않습니다.');
 		return;
-	} else if (status === kakao.maps.services.Status.ERROR) { 
+	} else if (status === kakao.maps.services.Status.ERROR) {
 
 		alert('검색 결과 중 오류가 발생했습니다.');
 		return;
@@ -55,11 +54,9 @@ function displayPlaces(places) {
 
 	// 검색 결과 목록에 추가된 항목들을 제거합니다
 	removeAllChildNods(listEl);
-	// 지도에 표시되고 있는 마커를 제거합니다
-	//removeMarker();
 
 	for (let i = 0; i < places.length; i++) {
-		//index[i] = i + 1;
+
 		// 마커를 생성하고 지도에 표시합니다
 		var placePosition = new kakao.maps.LatLng(places[i].y,
 			places[i].x), marker = addMarker(placePosition, i), itemEl = getListItem(
@@ -111,8 +108,8 @@ function displayPlaces(places) {
 			itemEl.onclick = function() {
 				//중복 처리
 				var bool = 0;
-				for(var i = 0; i < titles.length; i++) {
-					if(titles[i] == title)
+				for (var i = 0; i < titles.length; i++) {
+					if (titles[i] == title)
 						bool = 1;
 				}
 				if (bool == 0) {
@@ -122,12 +119,11 @@ function displayPlaces(places) {
 
 					selectedmarkers.push(marker);
 
-					var s = 'spotaddr' +  i;
-					
+					var s = 'spotaddr' + i;
+
 					if (title != "undefined") {
 						addrs.push(document.getElementById(s).innerHTML);
 						titles.push(title);
-						console.log(title);
 
 						displaySpots(selectedmarkers, titles, addrs);
 
@@ -155,7 +151,7 @@ function getListItem(index, places) {
 		+ '<div class="info"><span style="display: inline-block; height: .90em;">'
 		+ '   <h6>' + places.place_name + '</h6></span>';
 
-	itemStr += ' <br><span id="spotaddr'+ index +'" style="font-size: .80em;">'
+	itemStr += ' <br><span id="spotaddr' + index + '" style="font-size: .80em;">'
 		+ places.address_name + '</span><br>';
 
 	itemStr += '  <span class="tel" style="font-size: .80em;">'
@@ -230,7 +226,7 @@ function displayPagination(pagination) {
 // 검색결과 목록 또는 마커를 클릭했을 때 호출되는 함수입니다
 // 인포윈도우에 장소명을 표시합니다
 function displayInfowindow(marker, title) {
-	var content = '<div style="padding:5px;z-index:1;">' + title
+	var content = '<div style="padding:5px;z-index:1;white-space:nowrap;">' + title
 		+ '</div>';
 	infowindow.setContent(content);
 	infowindow.open(map, marker);

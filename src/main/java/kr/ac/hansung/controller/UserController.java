@@ -64,7 +64,6 @@ public class UserController {
 
       final User user = userService.createUser(request.getUserId());
 
-      //return new ResponseEntity<User>(user, HttpStatus.CREATED);
       return ResponseEntity.status(HttpStatus.CREATED).body(user);
    }
     
@@ -79,11 +78,8 @@ public class UserController {
       
       currentUser.setUserID(request.getUserId());
       
-      
       userService.updateUser(currentUser);
-      return new ResponseEntity<User>(currentUser, HttpStatus.OK);
-      
-      
+      return new ResponseEntity<User>(currentUser, HttpStatus.OK);    
       
    }
 

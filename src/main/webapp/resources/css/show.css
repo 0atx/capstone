@@ -1,0 +1,235 @@
+@charset "UTF-8";
+
+a {
+   color: #000000 !important;
+   text-decoration: none !important;
+}
+
+a:hover {
+   color: #000000 !important;
+}
+
+
+.wrap {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.testbtn {
+  min-width: 300px;
+  min-height: 60px;
+  font-family: 'Nunito', sans-serif;
+  font-size: 22px;
+  text-transform: uppercase;
+  letter-spacing: 1.3px;
+  font-weight: 700;
+  color: #313133;
+  background: #4FD1C5;
+background: linear-gradient(90deg, rgba(129,230,217,1) 0%, rgba(79,209,197,1) 100%);
+  border: none;
+  border-radius: 1000px;
+  box-shadow: 12px 12px 24px rgba(79,209,197,.64);
+  transition: all 0.3s ease-in-out 0s;
+  cursor: pointer;
+  outline: none;
+  position: relative;
+  padding: 10px;
+  }
+
+.testbtn::before {
+content: '';
+  border-radius: 1000px;
+  min-width: calc(300px + 12px);
+  min-height: calc(60px + 12px);
+  border: 6px solid #00FFCB;
+  box-shadow: 0 0 60px rgba(0,255,203,.64);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  transition: all .3s ease-in-out 0s;
+}
+
+.testbtn:hover, .testbtn:focus {
+  color: #313133;
+  transform: translateY(-6px);
+}
+
+.testbtn:hover::before, .testbtn:focus::before {
+  opacity: 1;
+}
+
+.testbtn::after {
+  content: '';
+  width: 30px; height: 30px;
+  border-radius: 100%;
+  border: 6px solid #00FFCB;
+  position: absolute;
+  z-index: -1;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  animation: ring 1.5s infinite;
+}
+
+.testbtn:hover::after, .testbtn:focus::after {
+  animation: none;
+  display: none;
+}
+
+@keyframes ring {
+  0% {
+    width: 30px;
+    height: 30px;
+    opacity: 1;
+  }
+  100% {
+    width: 300px;
+    height: 300px;
+    opacity: 0;
+  }
+}
+
+article{
+   width : 80% !important;
+   margin : 5vh 0 20vh 10vw;
+   text-align : center;
+   border : solid 2px #15d2c5;
+}
+.planTop{
+   background-color :#15d2c5;
+   color : #ffffff;
+   height : 15vh;
+}
+.planBot{
+   background-color :#15d2c5;
+   color : #ffffff;
+   height : 20vh;
+}
+li {
+   text-align:left;
+}
+.table{
+   width : 80% !important;
+   margin : 5% 0 5% 10%;
+}
+
+#caption {
+   text-align:center;
+   padding : 10px;   
+}
+
+tbody tr {
+   
+   color : #575757;
+   transition : 0.5s;
+}
+
+tbody tr:hover {
+   
+   background-color : #aef7f1;
+   color: #000000;
+
+}
+
+#tbsp1{
+   position:relative;
+   top:15%;
+   font-weight:bold;
+   font-size:25px;
+}
+#tbsp2{
+   position:relative;
+   top:40%;
+}
+
+
+/* The Modal (background) */
+.emailModal {
+   display: none; /* Hidden by default */
+   position: fixed; /* Stay in place */
+   z-index: 10; /* Sit on top */
+   left: 0;
+   top: 0;
+   width: 100%; /* Full width */
+   height: 100%; /* Full height */
+   overflow: auto; /* Enable scroll if needed */
+   background-color: rgb(0, 0, 0); /* Fallback color */
+   background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+}
+/* Modal Content/Box */
+.email-modal-content {
+   background-color: #fefefe;
+   margin: 15% auto; /* 15% from the top and centered */
+   padding: 20px;
+   border: 1px solid #888;
+   width: 70%; /* Could be more or less, depending on screen size */
+}
+
+/* The Modal (background) */
+.emailErrorModal {
+   display: none; /* Hidden by default */
+   position: fixed; /* Stay in place */
+   z-index: 10; /* Sit on top */
+   left: 0;
+   top: 0;
+   width: 100%; /* Full width */
+   height: 100%; /* Full height */
+   overflow: auto; /* Enable scroll if needed */
+   background-color: rgb(0, 0, 0); /* Fallback color */
+   background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+}
+/* Modal Content/Box */
+.email-error-modal-content {
+   background-color: #fefefe;
+   margin: 15% auto; /* 15% from the top and centered */
+   padding: 20px;
+   border: 1px solid #888;
+   width: 70%; /* Could be more or less, depending on screen size */
+}
+
+
+
+.position-left{
+   margin-left : 15px;
+}
+
+.emailForm { position:relative; height:60px; margin: 10px 10px 20px 15px;} /* 기본세팅 */
+.emailForm input { box-sizing:border-box; padding:20px 0 0; width:100%; height:100%; border:0 none; color:#595f63; outline:none; }
+.emailForm label { position:absolute; left:0%; bottom:0; width:100%; height:100%; border-bottom:1px solid #bdbdbd; text-align:left; 
+      pointer-events:none; color : #bdbdbd;}
+.emailForm label:after { content:""; position:absolute; left:0; bottom:-1px; width:0; height:100%; border-bottom:3px solid #15d2c5; transition:all .3s ease; } /* 파란색 가로줄 */
+.emailForm label span { position:absolute; left:0; bottom:5px; transition:all .3s ease; }
+.emailForm input:focus + label span, 
+.emailForm input:valid + label span { transform:translateY(-150%); font-size:14px; color:#15d2c5; }  /* input에 글을 입력하고 포커스가 지나간 상태에서 제어하려면 valid 선택자를 써야한다. */
+/* 포커스 될 때 label span(name)이 위로 올라감 */
+.emailForm input:focus + label::after,
+.emailForm input:valid + label::after { width:100%; transform:translateX(0); } 
+/* 포커스 될 때 파란색 가로줄이 생김 */
+
+#showPlanBtn{
+   background-color : #59d9cc; border-color : #59d9cc;
+}
+
+#showPlanBtn:hover{
+   background-color : #2cbeaf !important; border-color : #2cbeaf !important;
+}
+
+#returnModalBtn{
+   background-color : #59d9cc; border-color : #59d9cc;
+}
+
+#returnModalBtn:hover{
+   background-color : #2cbeaf !important; border-color : #2cbeaf !important;
+}
+
+#returnBtn{
+   background-color : #c7cbc7; border-color : #c7cbc7;
+}
+
+#returnBtn:hover{
+   background-color : #9ca398 !important; border-color : #9ca398 !important;
+}

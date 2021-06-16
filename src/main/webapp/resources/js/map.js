@@ -19,7 +19,6 @@ if (navigator.geolocation) {
 			message = '<div style="padding:5px;">현재위치</div>'; // 인포윈도우에 표시될 내용입니다
 
 		// 마커와 인포윈도우를 표시합니다
-		// displayMarker(locPosition, message);
 
 	});
 
@@ -33,5 +32,5 @@ if (navigator.geolocation) {
 		// 지도 중심좌표를 접속위치로 변경합니다
 		map.setCenter(locPosition);
 	}
-	
+
 }
