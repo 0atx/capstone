@@ -2,7 +2,7 @@
 ### 한성대학교 컴퓨터공학부 2021년도 캡스톤 디자인 
 
 
-  <caption><b> TEAM MEMBERS</b></caption>
+  <caption><b> TEAM MEMBERS</b></caption><br>
   
 | 이름 | 학번 |
 |:-:|---|
@@ -64,6 +64,32 @@ Tomcat Server를 이용한 Web Application을 사용자들에게 제공한다.<b
   <img src="https://lh5.googleusercontent.com/KdxEzK4w7-DG3H7d62oqx_PGanIDqQSgMoe2_qEYATHlEDcZfT53IPYioEYg2ecjS9hHAiWbmfTL9JrFstkIR4eg2hrc0cUx6_I18U0YqC9kjDC1GGhRrVWBN2Z4MlECvP9_y-pt" title="전체 시나리오 구조도">
     <figcaption><b><시나리오 구조도></b></figcaption>
   </figure>
+    <br><br>
+       
+<div>
+  <ul>
+    <li>메인 화면 (Home)</li>
+    <img src="https://lh5.googleusercontent.com/eNVDEo2PbAJHMv9ySLL9khcJi6ZFrNB6iFL9i2tZbjhVx0lya7foHKJ-0JHDYXF_XAv51v9aJ_A63eh0xTWRLfbu26a9WTaofmqgrPCF-g" title="메인화면">
+       <br>사용자가 처음 접속하였을 때 보여지는 페이지 모습 👆
+      <ul>
+        <li> "시작하기" 버튼 누른 후 스크롤 된 지역 목록 부분</li>
+          <img src="https://lh6.googleusercontent.com/IOro9hb7u14QYn02R58g2Qb7EI_vtocnfPNcGGNh-sXjFezSzfzVcJarxakP_-f_9O52A53hUdODTuzdshdqSMtt4xRk_xdndhW7-Fi-_g" title="도시목록">
+          <br>지역 목록에서는 각 지역의 유명 관광명소, 관련 영상, 날씨 정보를 제공<br>
+         원하는 지역을 선택하면 그 지역으로 지도의 시점이 이동된 일정 생성 페이지로 이동함.
+        <li>상단 메뉴바</li>
+        <img src="https://lh6.googleusercontent.com/djDVEXhaU0OR4miDKnZ670m5KQMKPb7Lq54q0bK8mNLDmSzuI7riYB4CLt_-wjM22shUdsRmDSMftbOc3rMEHX8JdQIbCNOILtG8aoAB" title="홈 메뉴바">
+       <br> HJJH TRIP 을 누르면 페이지를 리디렉션한다.
+        <br>여행지를 누르면 여행지 목록 쪽으로 자동 스크롤이, TOP PAGE를 누르면 가장 상단으로 자동 스크롤이 된다.
+        <br>일정 불러오기 에서는 사용자의 이메일을 통해 만들어진 일정을 불러온다.
+        <br>이용방법 에는 간단한 사이트 이용방법이 안내된다.
+      </ul>
+    <li>일정 생성 화면 (Map)</li>
+    <img src="https://lh3.googleusercontent.com/MQATVjpXzfIOhkKUghtFvP2_FkXH_7UHmjVQOm6VNTLUns3kzY5X-VZKO_viQqeAMbWQHRfm5vhy1Iv6qLXnK0Tme9sRrCsh65uBo5Pv" title="맵 화면">
+    <br>
+    
+  </ul>
+    </div>
+    
     
 ### 2.4 기술 스택
     
