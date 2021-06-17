@@ -1,4 +1,4 @@
-# Capstone HJJH Team_ README FILE
+# #36 Capstone HJJH Trip Team_ README FILE
 ### 한성대학교 컴퓨터공학부 2021년도 캡스톤 디자인 
 
 
